@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<bean id="vegetable" class="mySimpleSpringApp.Vegetable" />
+	<bean id="fruit" class="mySimpleSpringApp.Fruit" />
+	<bean id="dairy" class="mySimpleSpringApp.Dairy" />
+	<bean id="grain" class="mySimpleSpringApp.Grain" />
+	<bean id="meat" class="mySimpleSpringApp.Meat" />
+	
+	<bean id="otherFruit" class="mySimpleSpringApp.Fruit">
+		<constructor-arg index="0" value="Apple"/>
+	</bean>
+	
+	<bean id="otherVegetable" class="mySimpleSpringApp.Vegetable">
+		<property name="name" value="Brocolli"/>
+	</bean>
+	
+	<bean id="vegPName" class="mySimpleSpringApp.Vegetable" p:name="Potato"/>
+	
+	
+	
+	<bean id="fruit2" class="mySimpleSpringApp.Fruit"/>
+	<bean id="vegetable2" class="mySimpleSpringApp.Vegetable"/>
+	<bean id="dairy2" class="mySimpleSpringApp.Dairy"/>
+	<bean id="meat2" class="mySimpleSpringApp.Meat"/>
+	<bean id="grain2" class="mySimpleSpringApp.Grain"/>
+	
+	<bean id="mealSetter" class="mySimpleSpringApp.Meal">
+		<property name="fruit" ref="fruit2"/>
+		<property name="vegetable" ref="vegetable2"/>
+		<property name="dairy" ref="dairy2"/>
+		<property name="meat" ref="meat2"/>
+		<property name="grain" ref="grain2"/>
+	</bean>
+	
+	
+	
+	
+	<bean id="fruit3" class="mySimpleSpringApp.Fruit"/>
+	<bean id="vegetable3" class="mySimpleSpringApp.Vegetable"/>
+	<bean id="dairy3" class="mySimpleSpringApp.Dairy"/>
+	<bean id="meat3" class="mySimpleSpringApp.Meat"/>
+	<bean id="grain3" class="mySimpleSpringApp.Grain"/>
+	
+	<bean id="mealConst" class="mySimpleSpringApp.Meal">
+		<constructor-arg index="0" ref="fruit3"/>
+		<constructor-arg index="1" ref="vegetable3"/>
+		<constructor-arg index="2" ref="dairy3"/>
+		<constructor-arg index="3" ref="meat3"/>
+		<constructor-arg index="4" ref="grain3"/>
+	</bean>
+	
+	<bean id="mealConstAlt" class="mySimpleSpringApp.Meal">
+		<constructor-arg name="d" ref="dairy3"/>
+		<constructor-arg name="m" ref="meat3"/>
+		<constructor-arg name="v" ref="vegetable3"/>
+		<constructor-arg name="g" ref="grain3"/>
+		<constructor-arg name="f" ref="fruit3"/>
+	</bean>
+	
+	
+	<context:property-placeholder location="src/main/java/myApp.properties"/>
+	
+	<bean id="externalGrain" class="mySimpleSpringApp.Grain">
+		<property name="name" value="${def-grain}"/>
+	</bean>
+	
+	<bean id="mealOuter" class="mySimpleSpringApp.Meal">
+		<property name="fruit">
+			<bean id="appleInner" class="mySimpleSpringApp.Apple">
+				<property name="name" value="apple"/>
+				<property name="description" value="I'm an apple."/>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	
+	<bean id="car" class="mySimpleSpringApp.Car"/>
+	<bean id="motorcycle" class="mySimpleSpringApp.Motorcycle"/>
+	<bean id="airplane" class="mySimpleSpringApp.Airplane"/>
+	
+	<bean id="vAutowiredByType" class="mySimpleSpringApp.Vehicle" autowire="byType"/>
+	
+	<bean id="mAutowiredByName" class="mySimpleSpringApp.Meal" autowire="byName"/>
+	
+	<bean id="vAutowiredByConstructor" class="mySimpleSpringApp.Vehicle" autowire="constructor"/>
+
+</beans>
